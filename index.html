@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy"
+content="default-src 'self';
+script-src 'self' 'unsafe-inline';
+style-src 'self' 'unsafe-inline';
+img-src 'self' data:;
+media-src 'self';
+object-src 'none';
+base-uri 'self';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="Referrer-Policy" content="strict-origin">
+<title>Edukasi Phishing Korporasi | PT Rekind Daya Mamuju</title>
+
+<style>
+/* ======================================================
+   WORLD CLASS DESIGN SYSTEM
+====================================================== */
+:root{
+  --green-main:#006644;
+  --green-deep:#006644;
+  --green-soft:#2c795f;
+  --green-light:#8ba795;
+  --green-lighter:#ddede5;
+  --dark:#1f2937;
+  --muted:#6b7280;
+  --white:#ffffff;
+}
+
+/* ======================================================
+   RESET & BASE
+====================================================== */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:linear-gradient(135deg,var(--green-lighter),var(--green-lighter));
+  color:var(--dark);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ======================================================
+   LAYOUT
+====================================================== */
+.page{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+header{
+  background:linear-gradient(90deg,var(--green-main),var(--green-main));
+  color:#fff;
+  padding:18px 5vw;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+header h1{
+  margin:0;
+  font-size:1.05rem;
+  font-weight:600;
+}
+
+nav a{
+  color:#fff;
+  text-decoration:none;
+  margin-left:18px;
+  font-size:.9rem;
+  cursor:pointer;
+  position:relative;
+}
+
+nav a::after{
+  content:"";
+  position:absolute;
+  left:0;bottom:-5px;
+  width:0;height:2px;
+  background:#fff;
+  transition:.3s;
+}
+nav a:hover::after{width:100%}
+
+main{flex:1}
+
+.section{
+  min-height:calc(100vh - 140px);
+  padding:72px 5vw;
+  display:none;
+  animation:fadeSoft .4s ease;
+}
+.section.active{
+  display:block;
+}
+
+/* KHUSUS HERO */
+#home.section.active{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+
+/* ======================================================
+   HERO
+====================================================== */
+.hero{
+  max-width:72ch;
+  margin:auto;
+  text-align:center;
+}
+
+.hero h1{
+  font-size:clamp(2.4rem,3.2vw,3rem);
+  font-weight:700;
+  line-height:1.15;
+  margin-bottom:.75rem;
+}
+
+.hero h2{
+  font-size:clamp(1.6rem,2.2vw,1.9rem);
+  font-weight:500;
+  margin-bottom:.6rem;
+  opacity:.92;
+}
+
+.hero h3{
+  font-size:clamp(1.2rem,1.6vw,1.35rem);
+  font-weight:400;
+  margin-bottom:1.4rem;
+  opacity:.85;
+}
+
+.hero p{
+  max-width:60ch;
+  margin:auto;
+  font-size:clamp(1rem,1.1vw,1.05rem);
+  opacity:.82;
+}
+
+/* ======================================================
+   CONTENT
+====================================================== */
+.content{
+  max-width:1100px;
+  margin:auto;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+  margin-top:32px;
+}
+
+.card{
+  background:#fff;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 16px 40px rgba(0,0,0,.1);
+  border-top:6px solid var(--green-main);
+}
+
+.card h3{margin:.4rem 0}
+.card p{color:var(--muted)}
+
+.badge{
+  display:inline-block;
+  padding:5px 14px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--green-main),var(--green-main));
+  color:#fff;
+  font-size:.72rem;
+  font-weight:600;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  transition:.3s;
+}
+
+/* ======================================================
+   BOX
+====================================================== */
+.box{
+  background:#ffffff;
+  padding:38px;
+  border-radius:20px;
+  box-shadow:0 16px 40px rgba(0,0,0,.12);
+  max-width:820px;
+  margin:auto;
+}
+
+/* ======================================================
+   BUTTON
+====================================================== */
+.btn{
+  background:var(--green-main);
+  color:#ffffff;
+  border:none;
+  padding:12px 32px;
+  border-radius:12px;
+  cursor:pointer;
+}
+.btn:hover{background:var(--green-deep)}
+
+/* ======================================================
+   FORM
+====================================================== */
+.form-group{margin-bottom:16px}
+.form-group input,
+.form-group textarea{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid #d1d5db;
+  font-size:.9rem;
+}
+.form-group textarea{resize:vertical}
+
+/* ======================================================
+   FOOTER
+====================================================== */
+footer{
+  background:linear-gradient(90deg,var(--green-main),var(--green-main));
+  color:#fff;
+  padding:14px 5vw;
+  text-align:center;
+  font-size:.82rem;
+}
+
+/* ======================================================
+   ANIMATION
+====================================================== */
+@keyframes fadeSoft{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:none}
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+@media(max-width:768px){
+  header{flex-direction:column;gap:10px}
+  nav a{margin:0 8px}
+}
+</style>
+</head>
+
+<body>
+
+<audio src="jazz.mp3" autoplay loop></audio>
+
+<div class="page">
+
+<header>
+  <h1>Edukasi Phishing Awareness – PT Rekind Daya Mamuju</h1>
+  <nav>
+  <a data-target="home">Beranda</a>
+  <a data-target="materi">Materi</a>
+  <a data-target="simulasi">Simulasi</a>
+  <a data-target="tips">Tips</a>
+  <a data-target="kuis">Kuis</a>
+  <a data-target="kontak">Kontak</a>
+  <a data-target="pengaduan">Pengaduan</a>
+</nav>
+</header>
+
+<main>
+
+<!-- HOME -->
+<section id="home" class="section active">
+  <div class="hero">
+    <h1>Waspada Phishing, Lindungi Organisasi</h1>
+    <h2>Berhenti, Baca, dan Pahami sebelum Klik</h2>
+    <h3>Kesadaran digital bagian dari standar profesionalisme</h3>
+    <p>
+      Platform edukasi ini dirancang untuk membentuk kesadaran, disiplin,
+      dan ketahanan keamanan informasi di lingkungan korporasi.
+    </p>
+  </div>
+</section>
+
+<!-- MATERI -->
+<section id="materi" class="section">
+  <div class="content">
+    <h2>Apa Itu Phishing?</h2>
+    <p>Phishing adalah teknik penipuan dengan menyamar sebagai pihak tepercaya untuk memperoleh informasi sensitif.</p>
+    <div class="cards">
+      <div class="card" onclick="openMateri('email')" style="cursor:pointer">
+        <span class="badge">EMAIL</span>
+        <h3>Phishing Email</h3>
+        <p>Email palsu yang menyerupai institusi resmi dan memancing korban membuka tautan atau lampiran.</p>
+      </div>
+      <div class="card" onclick="openMateri('pesan')" style="cursor:pointer">
+        <span class="badge">PESAN</span>
+        <h3>Smishing</h3>
+        <p>Penipuan melalui SMS atau aplikasi pesan instan dengan tekanan psikologis.</p>
+      </div>
+      <div class="card" onclick="openMateri('telepon')" style="cursor:pointer">
+        <span class="badge">TELEPON</span>
+        <h3>Vishing</h3>
+        <p>Panggilan suara palsu yang meminta OTP, PIN, atau data rahasia lainnya.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DETAIL MATERI -->
+<section id="materi-detail" class="section">
+  <div class="box" id="materiDetailBox"></div>
+</section>
+
+
+<!-- SIMULASI -->
+<section id="simulasi" class="section">
+  <div class="box">
+    <p id="simulasiBox"></p>
+    <br>
+    <button class="btn" onclick="nextSimulasi()">Kasus Berikutnya</button>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section id="tips" class="section">
+  <div class="box">
+    <h3>Tips Aman dari Phishing</h3>
+    <ul>
+      <li>Pastikan keabsahan alamat email, domain, serta nomor telepon atau WhatsApp pengirim melalui verifikasi yang cermat dan bertanggung jawab.</li>
+      <li>Dalam kondisi apa pun, tidak diperkenankan membagikan OTP, PIN, kata sandi, maupun kredensial sistem kepada pihak mana pun.</li>
+      <li>Tingkatkan kewaspadaan terhadap setiap komunikasi dari pihak yang tidak dikenal, terutama yang menggunakan tekanan waktu, ancaman, atau iming-iming tertentu.</li>
+      <li>Segera laporkan setiap indikasi phishing atau aktivitas mencurigakan kepada Tim Teknologi Informasi atau Task Force Keamanan Informasi perusahaan.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- KUIS -->
+<section id="kuis" class="section">
+  <div class="box" id="quizBox"></div>
+</section>
+
+<!-- KONTAK -->
+<section id="kontak" class="section">
+  <div class="box">
+    <h3>Kontak Resmi</h3>
+    <p>📧 pengaduan-phising@rdm.co.id</p>
+  </div>
+</section>
+
+<!-- PENGADUAN -->
+<section id="pengaduan" class="section">
+  <div class="box">
+    <h3>Laporkan Indikasi Phishing</h3>
+    <p>Setiap laporan Anda membantu melindungi organisasi.</p>
+    <form onsubmit="sendReport(event)">
+      <div class="form-group">
+        <input id="nama" placeholder="Nama Lengkap" required>
+      </div>
+      <div class="form-group">
+        <input id="email" type="email" placeholder="Email Korporasi" required>
+      </div>
+      <div class="form-group">
+        <textarea id="laporan" rows="4" placeholder="Uraikan kronologi kejadian secara singkat dan jelas" required></textarea>
+      </div>
+      <button class="btn">Kirim Pengaduan</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+© 2026 Program Kesadaran Keamanan Informasi | Internal Audit Division | PT Rekind Daya Mamuju
+</footer>
+
+</div>
+
+<script>
+'use strict';
+
+/* ========== NAVIGATION SAFE MODE ========== */
+document.querySelectorAll('nav a').forEach(link=>{
+  link.addEventListener('click',()=>{
+    const target = link.dataset.target;
+    show(target);
+  });
+});
+
+function show(id){
+  document.querySelectorAll('.section')
+    .forEach(s => s.classList.remove('active'));
+
+  const target = document.getElementById(id);
+  if (!target) return;
+  target.classList.add('active');
+
+  if (id === "kuis") startQuiz();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* ================= DETAIL MATERI PHISHING ================= */
+const materiDetail = {
+  email: {
+    title: "Phishing Melalui Email",
+    content: `
+      <p>Email phishing sering menyamar sebagai institusi resmi, pimpinan, atau mitra kerja.</p>
+      <ul>
+        <li>Menggunakan domain mirip (contoh: @rekind-co.id)</li>
+        <li>Nada mendesak, rahasia, atau mengancam</li>
+        <li>Permintaan klik tautan, unduh lampiran, atau transfer dana</li>
+      </ul>
+      <p><strong>Dampak:</strong> Kebocoran data, CEO Fraud, kerugian finansial.</p>
+    `
+  },
+  pesan: {
+    title: "Phishing via Pesan (Smishing)",
+    content: `
+      <p>Smishing memanfaatkan WhatsApp atau SMS dengan tekanan psikologis tinggi.</p>
+      <ul>
+        <li>Mengaku dari HR, IT, Bank, atau Pimpinan</li>
+        <li>Meminta OTP, data payroll, atau reset akun</li>
+        <li>Biasanya terjadi di luar jam kerja</li>
+      </ul>
+      <p><strong>Catatan:</strong> OTP tidak pernah diminta lewat chat.</p>
+    `
+  },
+  telepon: {
+    title: "Phishing via Telepon (Vishing)",
+    content: `
+      <p>Vishing menggunakan suara dan otoritas palsu.</p>
+      <ul>
+        <li>Mengaku dari bank, auditor, atau regulator</li>
+        <li>Meminta PIN, OTP, atau konfirmasi data</li>
+        <li>Menekan dengan ancaman blokir akun</li>
+      </ul>
+      <p><strong>Aturan emas:</strong> Tutup telepon dan verifikasi mandiri.</p>
+    `
+  }
+};
+
+function openMateri(key){
+  const box = document.getElementById("materiDetailBox");
+  const m = materiDetail[key];
+  if (!m) return;
+
+  box.innerHTML = `
+    <h3>${m.title}</h3>
+    ${m.content}
+    <br>
+    <button class="btn" onclick="show('materi')">Kembali</button>
+  `;
+  show("materi-detail");
+}
+
+/* ================= SIMULASI KASUS NYATA ================= */
+const simulasi = [
+  {
+    title: "CEO Fraud – Instruksi Mendesak dari Pimpinan Puncak",
+    steps: [
+      "Pagi hari, staf keuangan menerima email yang terlihat sah dan mengatasnamakan Direktur Utama, lengkap dengan gaya bahasa dan tanda tangan yang menyerupai email resmi perusahaan.",
+      "Isi pesan bersifat sangat mendesak dan diklasifikasikan sebagai rahasia, dengan penekanan bahwa instruksi ini tidak boleh dibahas kepada pihak lain.",
+      "Email tersebut memerintahkan transfer dana dalam jumlah signifikan untuk kepentingan strategis perusahaan, disertai tekanan waktu yang ketat.",
+      "Karena posisi pengirim dan situasi yang menekan, staf tidak melakukan verifikasi lintas kanal melalui telepon, sekretariat Direksi, atau sistem persetujuan internal.",
+      "Dana berhasil ditransfer ke rekening yang ternyata dikendalikan pelaku yang sebelumnya telah mempelajari struktur organisasi dan pola kerja keuangan perusahaan.",
+      "Beberapa jam kemudian transaksi dinyatakan tidak sah, perusahaan mengalami kerugian finansial dan dilakukan audit investigatif serta evaluasi pengendalian internal."
+    ]
+  },
+  {
+    title: "Kebocoran OTP – Satu Kode, Dampak Sistemik",
+    steps: [
+      "Seorang pegawai menerima email notifikasi reset akun yang tampak identik dengan sistem internal atau layanan keuangan yang biasa digunakan.",
+      "Email tersebut berisi tautan yang menyerupai portal resmi, disertai peringatan bahwa akun akan diblokir apabila tidak segera ditindaklanjuti.",
+      "Setelah tautan dibuka, sistem palsu meminta kode OTP, yang secara psikologis terasa wajar karena prosedur keamanan digital sudah menjadi kebiasaan.",
+      "Kode OTP dimasukkan tanpa konfirmasi ke unit TI atau sistem resmi perusahaan.",
+      "Dalam hitungan menit, akun keuangan berhasil diambil alih dan pelaku memperoleh akses terhadap data serta transaksi sensitif.",
+      "Insiden baru terdeteksi setelah muncul aktivitas tidak wajar, menyebabkan kebocoran data, potensi kerugian finansial, dan proses pemulihan sistem yang kompleks."
+    ]
+  }
+];
+let si=0,st=0;
+function nextSimulasi(){
+ const b=document.getElementById("simulasiBox");
+ const d=simulasi[si];
+ b.innerHTML=`<h3>${d.title}</h3><p>${d.steps[st]}</p><small>Bagian ${st+1} dari ${d.steps.length}</small>`;
+ st++; if(st>=d.steps.length){st=0;si=(si+1)%simulasi.length}
+}
+nextSimulasi();
+
+/* ================= SECURITY QUIZ (MASTER BANK) ================= */
+const securityQuiz = [
+  {
+    q: "Email mengatasnamakan Direktur Utama meminta transfer dana mendesak dan bersifat rahasia.",
+    a: [
+      "Segera transfer",
+      "Balas email",
+      "Verifikasi lintas kanal resmi"
+    ],
+    c: 2
+  },
+  {
+    q: "Email reset akun meminta OTP melalui tautan.",
+    a: [
+      "Masukkan OTP",
+      "Abaikan",
+      "Verifikasi ke TI"
+    ],
+    c: 2
+  },
+  {
+    q: "Invoice vendor berubah rekening dan minta cepat dibayar.",
+    a: [
+      "Bayar",
+      "Cek kontrak & rekening",
+      "Forward"
+    ],
+    c: 1
+  },
+  {
+    q: "WA mengaku IT pusat meminta reset akun.",
+    a: [
+      "Ikuti",
+      "Minta OTP",
+      "Laporkan ke IT Security"
+    ],
+    c: 2
+  },
+  {
+    q: "Email hadiah undian minta data pribadi.",
+    a: [
+      "Isi",
+      "Hapus",
+      "Laporkan phishing"
+    ],
+    c: 2
+  },
+  {
+    q: "File .xlsm minta aktifkan macro.",
+    a: [
+      "Aktifkan",
+      "Scan lalu buka",
+      "Hapus & lapor"
+    ],
+    c: 2
+  },
+  {
+    q: "Login gagal dari luar negeri.",
+    a: [
+      "Abaikan",
+      "Ganti password & lapor",
+      "Tunggu"
+    ],
+    c: 1
+  },
+  {
+    q: "Email minta data direksi tanpa surat resmi.",
+    a: [
+      "Kirim",
+      "Minta surat resmi",
+      "Abaikan"
+    ],
+    c: 1
+  },
+  {
+    q: "USB tanpa label ditemukan.",
+    a: [
+      "Colokkan",
+      "Serahkan ke IT",
+      "Simpan"
+    ],
+    c: 1
+  },
+  {
+    q: "Domain email mirip perusahaan.",
+    a: [
+      "Percaya",
+      "Cek header & domain",
+      "Buka lampiran"
+    ],
+    c: 1
+  },
+  {
+    q: "Instruksi diminta dirahasiakan.",
+    a: [
+      "Ikuti",
+      "Laporkan",
+      "Tunda"
+    ],
+    c: 1
+  },
+  {
+    q: "QR Code tak dikenal ke halaman login.",
+    a: [
+      "Scan",
+      "Laporkan ke TI",
+      "Abaikan"
+    ],
+    c: 1
+  },
+  {
+    q: "Password sama di banyak sistem.",
+    a: [
+      "Aman",
+      "Single point of failure",
+      "Praktis"
+    ],
+    c: 1
+  },
+  {
+    q: "Email mendesak tanpa nama Anda.",
+    a: [
+      "Internal",
+      "Phishing massal",
+      "HR broadcast"
+    ],
+    c: 1
+  },
+  {
+    q: "Transfer diminta di luar SOP.",
+    a: [
+      "Boleh",
+      "Langgar GCG & kontrol",
+      "Situasional"
+    ],
+    c: 1
+  }
+];
+
+/* ================= QUIZ ENGINE ================= */
+let quiz = [];
+let qi = 0;
+let score = 0;
+
+function shuffle(arr){
+  return arr.sort(() => Math.random() - 0.5);
+}
+
+function startQuiz(){
+  quiz = shuffle([...securityQuiz]);
+  qi = 0;
+  score = 0;
+  renderQuiz();
+}
+
+function renderQuiz(){
+  const box = document.getElementById("quizBox");
+  if (!box) return;
+
+  if (qi >= quiz.length){
+    const ratio = score / quiz.length;
+    let level, note;
+
+    if (ratio === 1){
+      level = "SANGAT BAIK";
+      note = "Kesadaran keamanan informasi Anda berada pada level profesional.";
+    } else if (ratio >= 0.8){
+      level = "BAIK";
+      note = "Pemahaman kuat. Tetap waspada terhadap social engineering lanjutan.";
+    } else if (ratio >= 0.6){
+      level = "CUKUP";
+      note = "Masih terdapat risiko. Disarankan mengulang materi.";
+    } else {
+      level = "PERLU PERBAIKAN";
+      note = "Risiko tinggi terhadap phishing. Wajib edukasi ulang.";
+    }
+
+    box.innerHTML = `
+      <h3>Hasil Evaluasi</h3>
+      <p><strong>Skor:</strong> ${score}/${quiz.length}</p>
+      <p><strong>Kategori:</strong> ${level}</p>
+      <p>${note}</p>
+    `;
+    return;
+  }
+
+  const q = quiz[qi];
+  box.innerHTML = `
+    <p><strong>${qi+1}. ${q.q}</strong></p>
+    ${q.a.map((o,i)=>`
+      <label style="display:block;margin:8px 0">
+        <input type="radio" name="q" value="${i}">
+        ${o}
+      </label>`).join("")}
+    <br>
+    <button class="btn" onclick="answer()">Jawab</button>
+  `;
+}
+
+function answer(){
+  const sel = document.querySelector('input[name="q"]:checked');
+  if (!sel) return;
+  if (+sel.value === quiz[qi].c) score++;
+  qi++;
+  renderQuiz();
+}
+
+/* ================= FORM SANITATION ================= */
+function sendReport(e){
+  e.preventDefault();
+  const clean = v => v.replace(/[<>]/g,"");
+  location.href =
+    `mailto:itdepartment@rdm.co.id?subject=Pengaduan Phishing&body=
+Nama:${clean(nama.value)}
+Email:${clean(email.value)}
+Laporan:${clean(laporan.value)}`;
+}
+
+</script>
+
+</body>
+</html>
