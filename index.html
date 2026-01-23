@@ -1,718 +1,569 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy"
-content="default-src 'self';
-script-src 'self' 'unsafe-inline';
-style-src 'self' 'unsafe-inline';
-img-src 'self' data:;
-media-src 'self';
-object-src 'none';
-base-uri 'self';">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
-<meta http-equiv="Referrer-Policy" content="strict-origin">
-<title>Edukasi Phishing Korporasi | PT Rekind Daya Mamuju</title>
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Phishing Awareness Education - PT Rekind Daya Mamuju</title>
 <style>
-/* ======================================================
-   WORLD CLASS DESIGN SYSTEM
-====================================================== */
-:root{
-  --green-main:#006644;
-  --green-deep:#006644;
-  --green-soft:#2c795f;
-  --green-light:#8ba795;
-  --green-lighter:#ddede5;
-  --dark:#1f2937;
-  --muted:#6b7280;
-  --white:#ffffff;
-}
+    /* Sizes updated per request */
+    :root{
+        --max-width:1280px;            /* Max container width */
+        --header-height:80px;          /* Header height (72–84) */
+        --menu-font:15px;              /* Menu font (14–15) */
+        --fs-hero:30px;                /* Hero title (28–32) */
+        --fs-section:24px;             /* Section title (22–24) */
+        --fs-sub:22px;                 /* Section subtitle-level */
+        --fs-h3:18px;
+        --fs-p:14px;                   /* Paragraph 14px */
+        --card-padding:22px;           /* Card padding (20–24) */
+        --card-radius:14px;            /* Card radius (12–16) */
+        --btn-height:44px;             /* Button height (40–44) */
+        --footer-height:60px;          /* Footer height (56–64) */
+        --green-900:#155d34;
+        --green-700:#1e8a4e;
+        --green-100:#eaf6ef;
+        --gray-100:#f4f5f6;
+        --gray-400:#9aa0a6;
+        --white:#ffffff;
+        --accent-shadow:0 8px 24px rgba(30,138,78,0.08);
+        --gap-vertical:8px; /* ~6pt */
+    }
 
-/* ======================================================
-   RESET & BASE
-====================================================== */
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:linear-gradient(135deg,var(--green-lighter),var(--green-lighter));
-  color:var(--dark);
-  line-height:1.65;
-  -webkit-font-smoothing:antialiased;
-}
+    html,body{height:100%;margin:0;display: flex;justify-content: center;font-family:"Century Gothic", Arial, sans-serif;background:var(--gray-100);color:#222;}
+    .app{min-height: 100vh;
+    display: flex;flex-direction: column;max-width:var(--max-width);margin:32px auto;padding:24px;box-sizing:border-box;}
+    header.site-header{
+        display:flex;align-items:center;justify-content:space-between;
+        background:linear-gradient(90deg,var(--green-700),var(--green-900));
+        color:var(--white);
+        height:var(--header-height);
+        padding:0 18px;
+        border-radius:10px;
+    }
 
-/* ======================================================
-   LAYOUT
-====================================================== */
-.page{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-}
+    .site-footer{
+    background:linear-gradient(90deg,var(--green-700),var(--green-900));
+    color:#fff;
+    padding:14px 5vw;
+    text-align:center;
+    font-size:.82rem;
+    border-radius:8px;
+    margin-top:32px;
+    box-shadow:var(--accent-shadow);
+    height:var(--footer-height);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    }
 
-header{
-  background:linear-gradient(90deg,var(--green-main),var(--green-main));
-  color:#fff;
-  padding:18px 5vw;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-}
+    .brand{display:flex;align-items:center;gap:12px;}
+    .logo{
+        width:48px;height:48px;border-radius:8px;background:var(--white);display:flex;align-items:center;justify-content:center;color:var(--green-900);font-weight:700;font-size:18px;
+        box-shadow:var(--accent-shadow);overflow:hidden;/* penting agar logo tidak keluar */
+    }
+    .logo img{
+    width:100%;
+    height:100%;
+    object-fit:contain; /* jaga proporsi logo */
+    }
 
-header h1{
-  margin:0;
-  font-size:1.05rem;
-  font-weight:600;
-}
-
-nav a{
-  color:#fff;
-  text-decoration:none;
-  margin-left:18px;
-  font-size:.9rem;
-  cursor:pointer;
-  position:relative;
-}
-
-nav a::after{
-  content:"";
-  position:absolute;
-  left:0;bottom:-5px;
-  width:0;height:2px;
-  background:#fff;
-  transition:.3s;
-}
-nav a:hover::after{width:100%}
-
-main{flex:1}
-
-.section{
-  min-height:calc(100vh - 140px);
-  padding:72px 5vw;
-  display:none;
-  animation:fadeSoft .4s ease;
-}
-.section.active{
-  display:block;
-}
-
-/* KHUSUS HERO */
-#home.section.active{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-
-/* ======================================================
-   HERO
-====================================================== */
-.hero{
-  max-width:72ch;
-  margin:auto;
-  text-align:center;
-}
-
-.hero h1{
-  font-size:clamp(2.4rem,3.2vw,3rem);
-  font-weight:700;
-  line-height:1.15;
-  margin-bottom:.75rem;
-}
-
-.hero h2{
-  font-size:clamp(1.6rem,2.2vw,1.9rem);
-  font-weight:500;
-  margin-bottom:.6rem;
-  opacity:.92;
-}
-
-.hero h3{
-  font-size:clamp(1.2rem,1.6vw,1.35rem);
-  font-weight:400;
-  margin-bottom:1.4rem;
-  opacity:.85;
-}
-
-.hero p{
-  max-width:60ch;
-  margin:auto;
-  font-size:clamp(1rem,1.1vw,1.05rem);
-  opacity:.82;
-}
-
-/* ======================================================
-   CONTENT
-====================================================== */
-.content{
-  max-width:1100px;
-  margin:auto;
-}
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
-  margin-top:32px;
-}
-
-.card{
-  background:#fff;
-  padding:30px;
-  border-radius:18px;
-  box-shadow:0 16px 40px rgba(0,0,0,.1);
-  border-top:6px solid var(--green-main);
-}
-
-.card h3{margin:.4rem 0}
-.card p{color:var(--muted)}
-
-.badge{
-  display:inline-block;
-  padding:5px 14px;
-  border-radius:999px;
-  background:linear-gradient(90deg,var(--green-main),var(--green-main));
-  color:#fff;
-  font-size:.72rem;
-  font-weight:600;
-}
-
-.card:hover{
-  transform:translateY(-4px);
-  transition:.3s;
-}
-
-/* ======================================================
-   BOX
-====================================================== */
-.box{
-  background:#ffffff;
-  padding:38px;
-  border-radius:20px;
-  box-shadow:0 16px 40px rgba(0,0,0,.12);
-  max-width:820px;
-  margin:auto;
-}
-
-/* ======================================================
-   BUTTON
-====================================================== */
-.btn{
-  background:var(--green-main);
-  color:#ffffff;
-  border:none;
-  padding:12px 32px;
-  border-radius:12px;
-  cursor:pointer;
-}
-.btn:hover{background:var(--green-deep)}
-
-/* ======================================================
-   FORM
-====================================================== */
-.form-group{margin-bottom:16px}
-.form-group input,
-.form-group textarea{
-  width:100%;
-  padding:14px;
-  border-radius:12px;
-  border:1px solid #d1d5db;
-  font-size:.9rem;
-}
-.form-group textarea{resize:vertical}
-
-/* ======================================================
-   FOOTER
-====================================================== */
-footer{
-  background:linear-gradient(90deg,var(--green-main),var(--green-main));
-  color:#fff;
-  padding:14px 5vw;
-  text-align:center;
-  font-size:.82rem;
-}
-
-/* ======================================================
-   ANIMATION
-====================================================== */
-@keyframes fadeSoft{
-  from{opacity:0;transform:translateY(14px)}
-  to{opacity:1;transform:none}
-}
-
-/* ======================================================
-   RESPONSIVE
-====================================================== */
-@media(max-width:768px){
-  header{flex-direction:column;gap:10px}
-  nav a{margin:0 8px}
-}
+    .title{font-size:22px;font-weight:700;line-height:1;margin:0;}
+    .subtitle{font-size:var(--fs-p);opacity:0.75;margin:0;}
+    /* Hexagon nav */
+    nav.hex-nav{display:flex;gap:12px;align-items:center;}
+    .hex{
+        --size:56px;
+        width:var(--size);height:var(--size);display:inline-grid;place-items:center;
+        background:transparent;color:var(--white);cursor:pointer;border:none;outline:none;
+        transition:transform .28s ease, box-shadow .28s ease;
+        clip-path:polygon(25% 6.7%,75% 6.7%,100% 50%,75% 93.3%,25% 93.3%,0% 50%);
+        background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.04));
+        border:1px solid rgba(255,255,255,0.06);
+    }
+    .hex:hover{transform:translateY(-6px) scale(1.02);box-shadow:var(--accent-shadow);}
+    .hex small{font-size:var(--menu-font);display:block;text-align:center;line-height:1;}
+    /* Hide menu on home (class on body) */
+    body.home nav.hex-nav{display:none;}
+    /* Page area */
+    main.page{flex: 1;margin-top:20px;}
+    section.page-section{display:none;opacity:0;transform:translateY(8px);transition:opacity .36s ease,transform .36s ease;}
+    section.page-section.active{display:block;opacity:1;transform:none;}
+    .hero{background:linear-gradient(180deg,var(--green-100),#fff);padding:36px;border-radius:12px;box-shadow:var(--accent-shadow);display:flex;flex-direction:column;gap:12px;}
+    .hero h1{font-size:var(--fs-hero);margin:0;font-weight:700;}
+    .hero h2{font-size:var(--fs-sub);margin:0;font-weight:700;}
+    .hero h3{font-size:var(--fs-h3);margin:0;font-weight:600;}
+    .hero p{font-size:var(--fs-p);margin:0;line-height:1.4;}
+    .controls{margin-top:14px;display:flex;gap:10px;align-items:center;}
+    .btn{
+        background:var(--green-700);color:var(--white);
+        height:var(--btn-height);line-height:1;display:inline-flex;align-items:center;justify-content:center;
+        padding:0 16px;border-radius:10px;border:none;cursor:pointer;font-weight:700;transition:transform .22s ease,box-shadow .22s ease;
+    }
+    .btn.secondary{background:transparent;color:var(--green-700);border:1px solid var(--green-700);}
+    .btn:hover{transform:translateY(-4px);box-shadow:var(--accent-shadow);}
+    /* Cards grid */
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:16px;}
+    .card{grid-column:span 12;background:var(--white);padding:var(--card-padding);border-radius:var(--card-radius);box-shadow:0 6px 18px rgba(15,15,15,0.04);transition:transform .26s ease,box-shadow .26s ease;cursor:pointer;}
+    .card:hover{transform:translateY(-6px);box-shadow:0 14px 32px rgba(15,15,15,0.06);}
+    @media(min-width:700px){.card.col-6{grid-column:span 6}.card.col-4{grid-column:span 4}.card.col-3{grid-column:span 3}}
+    .card h3{font-size:var(--fs-section);margin:0 0 8px 0;font-weight:700}
+    .card p{font-size:var(--fs-p);margin:0;white-space:pre-line;}
+    .nav-crumbs{display:flex;gap:8px;align-items:center;font-size:13px;opacity:0.9;margin-bottom:8px}
+    .nav-buttons{display:flex;gap:10px;margin-top:16px}
+    .small{font-size:var(--fs-p);color:var(--gray-400)}
+    /* subtle lists with ✓ */
+    ul.checks{padding-left:18px;margin:0}
+    ul.checks li{list-style:none;margin:6px 0;padding-left:18px;position:relative}
+    ul.checks li:before{content:"✓";position:absolute;left:0;color:var(--green-700);font-weight:700}
+    /* form */
+    .form{display:flex;flex-direction:column;gap:10px}
+    .field{display:flex;flex-direction:column;gap:6px}
+    input[type="text"], input[type="email"], textarea{padding:10px;border-radius:8px;border:1px solid #e0e3e6;font-size:var(--fs-p);resize:vertical}
+    footer{background:linear-gradient(90deg,var(--green-700),var(--green-900));color:#fff;padding:14px 5vw;text-align:center;font-size:.82rem;border-radius:8px;margin-top:32px;box-shadow:var(--accent-shadow);height:var(--footer-height);display:flex;align-items:center;justify-content:center;}
+    /* utility */
+    .muted{opacity:0.85}
+    .center{display:flex;justify-content:center;align-items:center}
+    /* accessibility focus */
+    .hex:focus, .btn:focus, .card:focus{outline:3px solid rgba(30,138,78,0.18)}
+    /* Heading defaults to use section/hero vars when inline styles are absent */
+    h2{font-size:var(--fs-section);margin:0}
+    h3{font-size:var(--fs-sub);margin:0}
+    h4{font-size:var(--fs-h3);margin:0}
+    p{font-size:var(--fs-p)}
 </style>
 </head>
+<body class="home">
+<div class="app">
+    <header class="site-header" role="banner">
+        <div class="brand">
+            <div class="logo">
+                <img src="assets/Logo Zoom.png" 
+            alt="RDM">
+            </div>
+            <div>
+                <div class="title"><em>Phishing Awareness Education</em></div>
+                <div class="subtitle small">PT Rekind Daya Mamuju</div>
+            </div>
+        </div>
+        <nav class="hex-nav" aria-label="Navigasi utama">
+            <button class="hex" data-target="home" title="Beranda"><Large>Beranda</Large></button>
+            <button class="hex" data-target="materi" title="Materi"><Large>Materi</Large></button>
+            <button class="hex" data-target="alur" title="Alur Proses"><Large>Alur</Large></button>
+            <button class="hex" data-target="tips" title="Tips"><Large>Tips</Large></button>
+            <button class="hex" onclick="openQuiz()" title="Quiz"><Large>Quiz</Large></button>
+            <button class="hex" data-target="kontak" title="Kontak"><Large>Kontak</Large></button>
+        </nav>
+    </header>
 
-<body>
+    <main class="page" role="main">
+        <!-- BERANDA -->
+        <section id="home" class="page-section active" aria-labelledby="homeTitle">
+            <div class="hero" role="region" aria-label="Hero">
+                <h1 id="homeTitle">Waspada Phishing, Lindungi Organisasi</h1>
+                <h2>Berhenti, Baca, dan Pahami sebelum Klik</h2>
+                <h3>Kesadaran digital bagian dari standar profesionalisme</h3>
+                <p class="muted" style="margin-top:var(--gap-vertical)">Platform edukasi ini dirancang untuk membentuk kesadaran, disiplin, dan ketahanan keamanan informasi di lingkungan korporasi.</p>
+                <div class="controls">
+                    <button class="btn" id="startBtn">Mulai</button>
+                    <button class="btn secondary" id="learnMore">Pelajari Lebih Lanjut</button>
+                </div>
+            </div>
+        </section>
 
-<audio src="jazz.mp3" autoplay loop></audio>
+        <!-- Materi (induk) -->
+        <section id="materi" class="page-section" aria-labelledby="materiTitle">
+            <div class="nav-crumbs"><span class="small">Materi</span></div>
+            <h2 id="materiTitle">Pengenalan Umum Phishing</h2>
+            <h3 style="margin-top:6px">Peningkatan kesadaran atas penipuan digital disekitar kita</h3>
+            <h4 style="margin:6px 0">Apa itu <em>Phishing</em>?</h4>
+            <p style="margin-top:8px">Phishing adalah bentuk penipuan terstruktur di ruang digital yang dirancang untuk mengelabui korban agar memberikan atau membuka akses terhadap data pribadi, kredensial sistem, informasi sensitif, dana, serta aset strategis lainnya, melalui komunikasi palsu yang secara sengaja dibuat menyerupai dan/atau mengatasnamakan pihak yang sah.</p>
 
-<div class="page">
+            <div class="nav-buttons">
+                <button class="btn" data-next="sub1">Berikutnya</button>
+            </div>
+        </section>
 
-<header>
-  <h1>Edukasi Phishing Awareness – PT Rekind Daya Mamuju</h1>
-  <nav>
-  <a data-target="home">Beranda</a>
-  <a data-target="materi">Materi</a>
-  <a data-target="simulasi">Simulasi</a>
-  <a data-target="tips">Tips</a>
-  <a data-target="kuis">Kuis</a>
-  <a data-target="kontak">Kontak</a>
-  <a data-target="pengaduan">Pengaduan</a>
-</nav>
-</header>
+        <!-- Sub-Materi 1 -->
+        <section id="sub1" class="page-section" aria-labelledby="sub1Title">
+            <div class="nav-crumbs"><button class="btn secondary" data-back="materi" style="padding:6px 10px">⬅ Kembali</button><span class="small">Sub-Materi 1</span></div>
+            <h2 id="sub1Title">Kenapa disebut <em>Phishing</em>?</h2>
+            <h3>Istilah berasal dari kata "fishing" (memancing)</h3>
+            <p>Pelaku memancing korban menggunakan umpan psikologis, seperti:</p>
+            <ul class="checks">
+                <li>Iming-iming hadiah, bonus, atau kompensasi tertentu</li>
+                <li>Ancaman pemblokiran akun atau penalti</li>
+                <li>Pesan bernada mendesak: "harus segera", "hari ini juga"</li>
+            </ul>
+            <p style="margin-top:8px">Target data bernilai: username, password, OTP, nomor kartu, data pribadi, dan data korporasi sensitif.</p>
+            <div class="nav-buttons">
+                <button class="btn" data-next="sub2">Berikutnya</button>
+                <button class="btn secondary" data-back="materi">Kembali</button>
+            </div>
+        </section>
 
-<main>
+        <!-- Sub-Materi 2 -->
+        <section id="sub2" class="page-section" aria-labelledby="sub2Title">
+            <div class="nav-crumbs"><button class="btn secondary" data-back="sub1">⬅ Kembali</button><span class="small">Sub-Materi 2</span></div>
+            <h2 id="sub2Title">Kenapa <em>Phishing</em> Berbahaya?</h2>
+            <p>Satu insiden berhasil dapat memicu kerugian finansial, kebocoran data, gangguan operasional, dan kerusakan reputasi.</p>
+            <ul class="checks">
+                <li>Kerugian finansial langsung</li>
+                <li>Kebocoran data karyawan & pelanggan</li>
+                <li>Downtime operasional</li>
+                <li>Kerusakan reputasi & temuan audit</li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn" data-next="sub3">Berikutnya</button>
+                <button class="btn secondary" data-back="sub1">Kembali</button>
+            </div>
+        </section>
 
-<!-- HOME -->
-<section id="home" class="section active">
-  <div class="hero">
-    <h1>Waspada Phishing, Lindungi Organisasi</h1>
-    <h2>Berhenti, Baca, dan Pahami sebelum Klik</h2>
-    <h3>Kesadaran digital bagian dari standar profesionalisme</h3>
-    <p>
-      Platform edukasi ini dirancang untuk membentuk kesadaran, disiplin,
-      dan ketahanan keamanan informasi di lingkungan korporasi.
-    </p>
-  </div>
-</section>
+        <!-- Sub-Materi 3 (jenis) -->
+        <section id="sub3" class="page-section" aria-labelledby="sub3Title">
+            <div class="nav-crumbs"><button class="btn secondary" data-back="sub2">⬅ Kembali</button><span class="small">Sub-Materi 3</span></div>
+            <h2 id="sub3Title">Jenis-Jenis <em>Phishing</em> yang Perlu Diketahui</h2>
+            <p>Pilih jenis untuk melihat karakteristik, contoh, dan risiko.</p>
 
-<!-- MATERI -->
-<section id="materi" class="section">
-  <div class="content">
-    <h2>Apa Itu Phishing?</h2>
-    <p>Phishing adalah teknik penipuan dengan menyamar sebagai pihak tepercaya untuk memperoleh informasi sensitif.</p>
-    <div class="cards">
-      <div class="card" onclick="openMateri('email')" style="cursor:pointer">
-        <span class="badge">EMAIL</span>
-        <h3>Phishing Email</h3>
-        <p>Email palsu yang menyerupai institusi resmi dan memancing korban membuka tautan atau lampiran.</p>
-      </div>
-      <div class="card" onclick="openMateri('pesan')" style="cursor:pointer">
-        <span class="badge">PESAN</span>
-        <h3>Smishing</h3>
-        <p>Penipuan melalui SMS atau aplikasi pesan instan dengan tekanan psikologis.</p>
-      </div>
-      <div class="card" onclick="openMateri('telepon')" style="cursor:pointer">
-        <span class="badge">TELEPON</span>
-        <h3>Vishing</h3>
-        <p>Panggilan suara palsu yang meminta OTP, PIN, atau data rahasia lainnya.</p>
-      </div>
-    </div>
-  </div>
-</section>
+            <div class="grid" role="list">
+                <article class="card col-4" tabindex="0" data-target="subsub1" role="listitem">
+                    <h3>Phishing (Email Phising)</h3>
+                    <p>Email palsu yang menyerupai pihak resmi — vendor, institusi, atau unit internal perusahaan.</p>
+                </article>
 
-<!-- DETAIL MATERI -->
-<section id="materi-detail" class="section">
-  <div class="box" id="materiDetailBox"></div>
-</section>
+                <article class="card col-4" tabindex="0" data-target="subsub2" role="listitem">
+                    <h3>Smishing (Short Message Phising)</h3>
+                    <p>Penipuan via SMS atau aplikasi pesan instan (WhatsApp, Telegram) berisi instruksi mendesak.</p>
+                </article>
 
+                <article class="card col-4" tabindex="0" data-target="subsub3" role="listitem">
+                    <h3>Vhishing (Voice/Video Phising)</h3>
+                    <p>Panggilan suara/video yang menyamar sebagai atasan atau pihak berwenang (termasuk deepfake).</p>
+                </article>
+            </div>
 
-<!-- SIMULASI -->
-<section id="simulasi" class="section">
-  <div class="box">
-    <p id="simulasiBox"></p>
-    <br>
-    <button class="btn" onclick="nextSimulasi()">Kasus Berikutnya</button>
-  </div>
-</section>
+            <div class="nav-buttons" style="margin-top:18px">
+                <button class="btn" data-next="sub4">Berikutnya</button>
+                <button class="btn secondary" data-back="sub2">Kembali</button>
+            </div>
+        </section>
 
-<!-- TIPS -->
-<section id="tips" class="section">
-  <div class="box">
-    <h3>Tips Aman dari Phishing</h3>
-    <ul>
-      <li>Pastikan keabsahan alamat email, domain, serta nomor telepon atau WhatsApp pengirim melalui verifikasi yang cermat dan bertanggung jawab.</li>
-      <li>Dalam kondisi apa pun, tidak diperkenankan membagikan OTP, PIN, kata sandi, maupun kredensial sistem kepada pihak mana pun.</li>
-      <li>Tingkatkan kewaspadaan terhadap setiap komunikasi dari pihak yang tidak dikenal, terutama yang menggunakan tekanan waktu, ancaman, atau iming-iming tertentu.</li>
-      <li>Segera laporkan setiap indikasi phishing atau aktivitas mencurigakan kepada Tim Teknologi Informasi atau Task Force Keamanan Informasi perusahaan.</li>
-    </ul>
-  </div>
-</section>
+        <!-- Sub-Sub-Materi 1 (Email) -->
+        <section id="subsub1" class="page-section" aria-labelledby="ss1Title">
+            <div class="nav-crumbs"><button class="btn secondary" data-back="sub3">⬅ Kembali</button><span class="small">Sub-Sub-Materi 1</span></div>
+            <h2 id="ss1Title">Phishing (Email Phising)</h2>
+            <h3>Phishing Melalui Surat Elektronik</h3>
+            <p>Pelaku memalsukan alamat pengirim, domain, dan tampilan pesan untuk meniru bank, vendor, atau instansi resmi.</p>
+            <ul class="checks">
+                <li>Mendorong akses tautan berbahaya</li>
+                <li>Mengirim lampiran palsu (invoice, dokumen)</li>
+                <li>Instruksi pembayaran tidak sah</li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn" data-next="contoh-phishing">Berikutnya</button>
+                <button class="btn secondary" data-back="sub3">Kembali</button>
+            </div>
+        </section>
 
-<!-- KUIS -->
-<section id="kuis" class="section">
-  <div class="box" id="quizBox"></div>
-</section>
+        <!-- Contoh Kasus Phishing -->
+        <section id="contoh-phishing" class="page-section" aria-labelledby="contohPh">
+            <div class="nav-crumbs"><button class="btn secondary" data-back="subsub1">⬅ Kembali</button><span class="small">Contoh Kasus</span></div>
+            <h2 id="contohPh">Contoh Kasus Email Phishing</h2>
+            <p>Seringkali pelaku memodifikasi huruf/domain: contoh:</p>
+            <p style="font-weight:700">meeting.site@rdm.co.id  →  meet1ng.s1te@rdm.co.1d</p>
+            <p>Mengapa sering berhasil?</p>
+            <ul class="checks">
+                <li>Nama/alamat terlihat dikenal</li>
+                <li>Tampilan resmi</li>
+                <li>Adanya tekanan waktu</li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn" data-next="risiko-phishing">Berikutnya</button>
+                <button class="btn secondary" data-back="subsub1">Kembali</button>
+            </div>
+        </section>
 
-<!-- KONTAK -->
-<section id="kontak" class="section">
-  <div class="box">
-    <h3>Kontak Resmi</h3>
-    <p>📧 pengaduan-phising@rdm.co.id</p>
-  </div>
-</section>
+        <!-- Risiko Phishing -->
+        <section id="risiko-phishing" class="page-section" aria-labelledby="risikoPh">
+            <div class="nav-crumbs"><button class="btn secondary" data-back="contoh-phishing">⬅ Kembali</button><span class="small">Risiko</span></div>
+            <h2 id="risikoPh">Risiko Phising (Email)</h2>
+            <h3>Contoh: Penipuan Pembayaran Vendor</h3>
+            <p>Permintaan perubahan rekening atau instruksi transfer palsu yang tampak sah.</p>
+            <ul class="checks">
+                <li>Kerugian finansial langsung</li>
+                <li>Kebocoran data kontrak dan vendor</li>
+                <li>Pengambilalihan akun internal</li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn" data-back="sub3">Selesai</button>
+            </div>
+        </section>
 
-<!-- PENGADUAN -->
-<section id="pengaduan" class="section">
-  <div class="box">
-    <h3>Laporkan Indikasi Phishing</h3>
-    <p>Setiap laporan Anda membantu melindungi organisasi.</p>
-    <form onsubmit="sendReport(event)">
-      <div class="form-group">
-        <input id="nama" placeholder="Nama Lengkap" required>
-      </div>
-      <div class="form-group">
-        <input id="email" type="email" placeholder="Email Korporasi" required>
-      </div>
-      <div class="form-group">
-        <textarea id="laporan" rows="4" placeholder="Uraikan kronologi kejadian secara singkat dan jelas" required></textarea>
-      </div>
-      <button class="btn">Kirim Pengaduan</button>
-    </form>
-  </div>
-</section>
+        <!-- Sub-Sub-Materi 2 (Smishing) -->
+        <section id="subsub2" class="page-section" aria-labelledby="ss2Title">
+            <div class="nav-crumbs"><button class="btn secondary" data-back="sub3">⬅ Kembali</button><span class="small">Sub-Sub-Materi 2</span></div>
+            <h2 id="ss2Title">Smishing (Short Message Phising)</h2>
+            <p>Smishing via SMS/WA dirancang singkat dan mendesak untuk memancing respon cepat.</p>
+            <ul class="checks">
+                <li>Platform: SMS, WhatsApp, Telegram</li>
+                <li>Pesan sering berisi iming-iming atau ancaman pemblokiran</li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn" data-next="contoh-smishing">Berikutnya</button>
+                <button class="btn secondary" data-back="sub3">Kembali</button>
+            </div>
+        </section>
 
-</main>
+        <section id="contoh-smishing" class="page-section">
+            <div class="nav-crumbs"><button class="btn secondary" data-back="subsub2">⬅ Kembali</button><span class="small">Contoh Kasus</span></div>
+            <h2>Contoh Kasus Smishing</h2>
+            <p>Contoh pesan palsu meniru bank:</p>
+            <p style="font-weight:700">
+YUHU BANK
+Selamat! Anda mendapatkan bonus Rp5.000.000
+Klaim melalui: http://bonus-reward-verifikasi.com/
+            </p>
+            <p>Tautan bukan domain resmi — tujuan mencuri data/dana.</p>
+            <div class="nav-buttons">
+                <button class="btn" data-next="risiko-smishing">Berikutnya</button>
+                <button class="btn secondary" data-back="subsub2">Kembali</button>
+            </div>
+        </section>
 
-<footer>
-© 2026 Program Kesadaran Keamanan Informasi | Internal Audit Division | PT Rekind Daya Mamuju
-</footer>
+        <section id="risiko-smishing" class="page-section">
+            <div class="nav-crumbs"><button class="btn secondary" data-back="contoh-smishing">⬅ Kembali</button><span class="small">Risiko</span></div>
+            <h2>Risiko Smishing</h2>
+            <ul class="checks">
+                <li>Kebocoran identitas & akses</li>
+                <li>Penipuan berantai terhadap perusahaan</li>
+                <li>Peningkatan risiko fraud & reputasi</li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn" data-back="sub3">Selesai</button>
+            </div>
+        </section>
 
+        <!-- Sub-Sub-Materi 3 (Vhishing) -->
+        <section id="subsub3" class="page-section" aria-labelledby="ss3Title">
+            <div class="nav-crumbs"><button class="btn secondary" data-back="sub3">⬅ Kembali</button><span class="small">Sub-Sub-Materi 3</span></div>
+            <h2 id="ss3Title">Vhishing (Voice/Video Phising)</h2>
+            <p>Penyamaran melalui panggilan suara/video — termasuk penggunaan deepfake untuk meniru pimpinan.</p>
+            <ul class="checks">
+                <li>Menekan emosi & kepatuhan instan</li>
+                <li>Memanfaatkan otoritas figur yang dikenal</li>
+                <li>Berpotensi memerintahkan transfer atau akses sistem</li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn" data-next="contoh-vhishing">Berikutnya</button>
+                <button class="btn secondary" data-back="sub3">Kembali</button>
+            </div>
+        </section>
+
+        <section id="contoh-vhishing" class="page-section">
+            <div class="nav-crumbs"><button class="btn secondary" data-back="subsub3">⬅ Kembali</button><span class="small">Contoh Kasus</span></div>
+            <h2>Contoh Kasus Vhishing</h2>
+            <p>Pelaku mengumpulkan rekaman suara pimpinan dari sumber terbuka, memodifikasi dengan AI, lalu menelepon korban untuk instruksi mendesak.</p>
+            <ul class="checks">
+                <li>Transfer dana mendesak</li>
+                <li>Proses invoice palsu</li>
+                <li>Pemberian akses sistem tanpa verifikasi</li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn" data-next="risiko-vhishing">Berikutnya</button>
+                <button class="btn secondary" data-back="subsub3">Kembali</button>
+            </div>
+        </section>
+
+        <section id="risiko-vhishing" class="page-section">
+            <div class="nav-crumbs"><button class="btn secondary" data-back="contoh-vhishing">⬅ Kembali</button><span class="small">Risiko</span></div>
+            <h2>Risiko Vhishing</h2>
+            <ul class="checks">
+                <li>Transaksi ilegal & penyalahgunaan dana</li>
+                <li>Pelanggaran SOP & kontrol internal</li>
+                <li>Gangguan operasional dan keselamatan kerja</li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn" data-back="sub3">Selesai</button>
+            </div>
+        </section>
+
+        <!-- Kesimpulan -->
+        <section id="sub4" class="page-section">
+            <div class="nav-crumbs"><button class="btn secondary" data-back="sub3">⬅ Kembali</button><span class="small">Sub-Materi 4</span></div>
+            <h2>Tahap Akhir – Penyelesaian</h2>
+            <h3>Anda Telah Menyelesaikan Edukasi Phishing</h3>
+            <p>Terima kasih telah mengikuti seluruh rangkaian edukasi phishing. Berhenti sejenak, cek ulang, dan jangan mudah percaya.</p>
+            <div class="nav-buttons">
+                <button class="btn" data-target="alur">Menu Alur</button>
+                <button class="btn secondary" data-target="tips">Tips</button>
+            </div>
+        </section>
+
+        <!-- Alur Proses -->
+        <section id="alur" class="page-section">
+            <div class="nav-crumbs"><span class="small">Alur Proses</span></div>
+            <h2>Alur Serangan & Respons</h2>
+            <div class="card">
+                <h3>Serangan Phishing yang Terintegrasi dan Saling Menguatkan</h3>
+                <p>Pelaku menggabungkan email, SMS/WA, dan panggilan untuk membangun kepercayaan bertahap.</p>
+            </div>
+
+            <div class="grid" style="margin-top:14px">
+                <div class="card col-4">
+                    <h3>1. Tahap Awal – Email Phishing</h3>
+                    <p>Domain dimanipulasi, invoice palsu, konteks formal.</p>
+                </div>
+                <div class="card col-4">
+                    <h3>2. Tahap Penguat – Smishing</h3>
+                    <p>SMS/WA menciptakan urgensi: "Mohon cek email terkait invoice. Pembayaran hari ini."</p>
+                </div>
+                <div class="card col-4">
+                    <h3>3. Tahap Persiapan – Data & Kepercayaan</h3>
+                    <p>Informasi internal dikumpulkan untuk mempersonalisasi serangan.</p>
+                </div>
+                <div class="card col-6">
+                    <h3>4. Tahap Akhir – Vhishing (Deepfake Voice)</h3>
+                    <p>Panggilan menyamar sebagai atasan untuk perintah transfer mendesak.</p>
+                </div>
+                <div class="card col-6">
+                    <h3>Mengapa Kombinasi Ini Berbahaya?</h3>
+                    <p>Setiap kanal saling menguatkan: email (konteks), SMS (urgensi), data (personalisasi), telepon (otoritas).</p>
+                </div>
+            </div>
+
+            <div class="nav-buttons" style="margin-top:12px">
+                <button class="btn" data-next="alur2">Berikutnya</button>
+                <button class="btn secondary" data-target="home">Beranda</button>
+            </div>
+        </section>
+
+        <section id="alur2" class="page-section">
+            <div class="nav-crumbs"><button class="btn secondary" data-back="alur">⬅ Kembali</button><span class="small">Alur 2</span></div>
+            <div class="card">
+                <h3>Langkah Kunci Respons & Pencegahan</h3>
+                <ul class="checks">
+                    <li>Verifikasi setiap permintaan pembayaran via kanal resmi</li>
+                    <li>Periksa alamat domain, lampiran, dan tautan</li>
+                    <li>Terapkan MFA & prinsip need-to-know</li>
+                    <li>Laporkan pesan mencurigakan tanpa takut disalahkan</li>
+                </ul>
+            </div>
+            <div class="nav-buttons" style="margin-top:12px">
+                <button class="btn" data-target="tips">Lanjut ke Tips</button>
+                <button class="btn secondary" data-target="home">Beranda</button>
+            </div>
+        </section>
+
+        <!-- Tips -->
+        <section id="tips" class="page-section">
+            <div class="nav-crumbs"><span class="small">Tips Utama</span></div>
+            <h2>Phishing berhasil bukan semata karena teknologi,</h2>
+            <h3>Faktor Pemicu Keberhasilan phising, antara lain:</h3>
+            <ul class="checks">
+                <li>Kesadaran belum merata</li>
+                <li>Kepatuhan SOP tidak konsisten</li>
+                <li>Ketergantungan komunikasi informal</li>
+                <li>Keamanan akun masih lemah</li>
+                <li>Minim latihan & simulasi</li>
+            </ul>
+
+            <div style="margin-top:12px" class="grid">
+                <div class="card col-6">
+                    <h3>Tips Aman - Individu</h3>
+                    <h4 style="margin-top:8px">1. Selalu Verifikasi Pengirim</h4>
+                    <p style="margin-top:6px">• Cek email & domain • Cek nomor WA • Jangan hanya percaya nama pengirim</p>
+                    <h4 style="margin-top:8px">2. Jangan Bagikan Kredensial</h4>
+                    <p>OTP, PIN, password tidak boleh dibagikan.</p>
+                </div>
+
+                <div class="card col-6">
+                    <h3>Tips - Level Perusahaan</h3>
+                    <ul class="checks">
+                        <li>Edukasi & awareness rutin</li>
+                        <li>Verifikasi berlapis untuk transaksi</li>
+                        <li>Aturan: "No Instruction by Phone Only"</li>
+                        <li>Penguatan teknologi: 2FA, email security</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="nav-buttons" style="margin-top:12px">
+                <button class="btn" data-target="alur">Alur</button>
+                <button class="btn secondary" data-target="kontak">Kontak Pengaduan</button>
+            </div>
+        </section>
+
+        <!-- Quiz -->
+        <section id="quiz" class="page-section">
+            <div class="nav-crumbs"><span class="small">Quiz</span></div>
+            <div class="card">
+                <h3>Quiz Phising Awarness</h3>
+                <p>Evaluasi pemahaman Anda melalui formulir berikut.</p>
+                <div style="margin-top:12px">
+                    <button class="btn" onclick="openQuiz()">Buka Quiz</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kontak & Pengaduan -->
+        <section id="kontak" class="page-section" aria-labelledby="kontakTitle">
+            <div class="nav-crumbs"><span class="small">Kontak Pengaduan</span></div>
+            <h2 id="kontakTitle">Laporan Indikasi Phising</h2>
+            <p>Partisipasi Anda bagian dari menjaga keberlangsungan perusahaan.</p>
+
+            <div class="card">
+                <form id="reportForm" class="form" onsubmit="sendReport(event)">
+                    <div class="field"><label class="small">Nama Pengirim</label><input type="text" id="fname" required placeholder="Nama lengkap" /></div>
+                    <div class="field"><label class="small">Email Pengirim</label><input type="email" id="femail" required placeholder="alamat@domain.com" /></div>
+                    <div class="field"><label class="small">Kronologi Singkat</label><textarea id="fbody" rows="6" required placeholder="Uraikan kronologi kejadian secara singkat dan jelas"></textarea></div>
+                    <div style="display:flex;gap:10px;align-items:center;">
+                        <button class="btn" type="submit">Kirim Kronologi</button>
+                        <button class="btn secondary" type="button" data-target="home">Batal</button>
+                    </div>
+                    <p class="small muted" style="margin-top:8px">Email akan dikirim ke Pengaduan.Phising@rdm.co.id</p>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        © 2026 | Program Kesadaran Keamanan Informasi | Internal Audit Division | PT Rekind Daya Mamuju
+    </footer>
 </div>
 
 <script>
-'use strict';
-
-/* ========== NAVIGATION SAFE MODE ========== */
-document.querySelectorAll('nav a').forEach(link=>{
-  link.addEventListener('click',()=>{
-    const target = link.dataset.target;
-    show(target);
-  });
-});
-
-function show(id){
-  document.querySelectorAll('.section')
-    .forEach(s => s.classList.remove('active'));
-
-  const target = document.getElementById(id);
-  if (!target) return;
-  target.classList.add('active');
-
-  if (id === "kuis") startQuiz();
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-/* ================= DETAIL MATERI PHISHING ================= */
-const materiDetail = {
-  email: {
-    title: "Phishing Melalui Email",
-    content: `
-      <p>Email phishing sering menyamar sebagai institusi resmi, pimpinan, atau mitra kerja.</p>
-      <ul>
-        <li>Menggunakan domain mirip (contoh: @rekind-co.id)</li>
-        <li>Nada mendesak, rahasia, atau mengancam</li>
-        <li>Permintaan klik tautan, unduh lampiran, atau transfer dana</li>
-      </ul>
-      <p><strong>Dampak:</strong> Kebocoran data, CEO Fraud, kerugian finansial.</p>
-    `
-  },
-  pesan: {
-    title: "Phishing via Pesan (Smishing)",
-    content: `
-      <p>Smishing memanfaatkan WhatsApp atau SMS dengan tekanan psikologis tinggi.</p>
-      <ul>
-        <li>Mengaku dari HR, IT, Bank, atau Pimpinan</li>
-        <li>Meminta OTP, data payroll, atau reset akun</li>
-        <li>Biasanya terjadi di luar jam kerja</li>
-      </ul>
-      <p><strong>Catatan:</strong> OTP tidak pernah diminta lewat chat.</p>
-    `
-  },
-  telepon: {
-    title: "Phishing via Telepon (Vishing)",
-    content: `
-      <p>Vishing menggunakan suara dan otoritas palsu.</p>
-      <ul>
-        <li>Mengaku dari bank, auditor, atau regulator</li>
-        <li>Meminta PIN, OTP, atau konfirmasi data</li>
-        <li>Menekan dengan ancaman blokir akun</li>
-      </ul>
-      <p><strong>Aturan emas:</strong> Tutup telepon dan verifikasi mandiri.</p>
-    `
-  }
-};
-
-function openMateri(key){
-  const box = document.getElementById("materiDetailBox");
-  const m = materiDetail[key];
-  if (!m) return;
-
-  box.innerHTML = `
-    <h3>${m.title}</h3>
-    ${m.content}
-    <br>
-    <button class="btn" onclick="show('materi')">Kembali</button>
-  `;
-  show("materi-detail");
-}
-
-/* ================= SIMULASI KASUS NYATA ================= */
-const simulasi = [
-  {
-    title: "CEO Fraud – Instruksi Mendesak dari Pimpinan Puncak",
-    steps: [
-      "Pagi hari, staf keuangan menerima email yang terlihat sah dan mengatasnamakan Direktur Utama, lengkap dengan gaya bahasa dan tanda tangan yang menyerupai email resmi perusahaan.",
-      "Isi pesan bersifat sangat mendesak dan diklasifikasikan sebagai rahasia, dengan penekanan bahwa instruksi ini tidak boleh dibahas kepada pihak lain.",
-      "Email tersebut memerintahkan transfer dana dalam jumlah signifikan untuk kepentingan strategis perusahaan, disertai tekanan waktu yang ketat.",
-      "Karena posisi pengirim dan situasi yang menekan, staf tidak melakukan verifikasi lintas kanal melalui telepon, sekretariat Direksi, atau sistem persetujuan internal.",
-      "Dana berhasil ditransfer ke rekening yang ternyata dikendalikan pelaku yang sebelumnya telah mempelajari struktur organisasi dan pola kerja keuangan perusahaan.",
-      "Beberapa jam kemudian transaksi dinyatakan tidak sah, perusahaan mengalami kerugian finansial dan dilakukan audit investigatif serta evaluasi pengendalian internal."
-    ]
-  },
-  {
-    title: "Kebocoran OTP – Satu Kode, Dampak Sistemik",
-    steps: [
-      "Seorang pegawai menerima email notifikasi reset akun yang tampak identik dengan sistem internal atau layanan keuangan yang biasa digunakan.",
-      "Email tersebut berisi tautan yang menyerupai portal resmi, disertai peringatan bahwa akun akan diblokir apabila tidak segera ditindaklanjuti.",
-      "Setelah tautan dibuka, sistem palsu meminta kode OTP, yang secara psikologis terasa wajar karena prosedur keamanan digital sudah menjadi kebiasaan.",
-      "Kode OTP dimasukkan tanpa konfirmasi ke unit TI atau sistem resmi perusahaan.",
-      "Dalam hitungan menit, akun keuangan berhasil diambil alih dan pelaku memperoleh akses terhadap data serta transaksi sensitif.",
-      "Insiden baru terdeteksi setelah muncul aktivitas tidak wajar, menyebabkan kebocoran data, potensi kerugian finansial, dan proses pemulihan sistem yang kompleks."
-    ]
-  }
-];
-let si=0,st=0;
-function nextSimulasi(){
- const b=document.getElementById("simulasiBox");
- const d=simulasi[si];
- b.innerHTML=`<h3>${d.title}</h3><p>${d.steps[st]}</p><small>Bagian ${st+1} dari ${d.steps.length}</small>`;
- st++; if(st>=d.steps.length){st=0;si=(si+1)%simulasi.length}
-}
-nextSimulasi();
-
-/* ================= SECURITY QUIZ (MASTER BANK) ================= */
-const securityQuiz = [
-  {
-    q: "Email mengatasnamakan Direktur Utama meminta transfer dana mendesak dan bersifat rahasia.",
-    a: [
-      "Segera transfer",
-      "Balas email",
-      "Verifikasi lintas kanal resmi"
-    ],
-    c: 2
-  },
-  {
-    q: "Email reset akun meminta OTP melalui tautan.",
-    a: [
-      "Masukkan OTP",
-      "Abaikan",
-      "Verifikasi ke TI"
-    ],
-    c: 2
-  },
-  {
-    q: "Invoice vendor berubah rekening dan minta cepat dibayar.",
-    a: [
-      "Bayar",
-      "Cek kontrak & rekening",
-      "Forward"
-    ],
-    c: 1
-  },
-  {
-    q: "WA mengaku IT pusat meminta reset akun.",
-    a: [
-      "Ikuti",
-      "Minta OTP",
-      "Laporkan ke IT Security"
-    ],
-    c: 2
-  },
-  {
-    q: "Email hadiah undian minta data pribadi.",
-    a: [
-      "Isi",
-      "Hapus",
-      "Laporkan phishing"
-    ],
-    c: 2
-  },
-  {
-    q: "File .xlsm minta aktifkan macro.",
-    a: [
-      "Aktifkan",
-      "Scan lalu buka",
-      "Hapus & lapor"
-    ],
-    c: 2
-  },
-  {
-    q: "Login gagal dari luar negeri.",
-    a: [
-      "Abaikan",
-      "Ganti password & lapor",
-      "Tunggu"
-    ],
-    c: 1
-  },
-  {
-    q: "Email minta data direksi tanpa surat resmi.",
-    a: [
-      "Kirim",
-      "Minta surat resmi",
-      "Abaikan"
-    ],
-    c: 1
-  },
-  {
-    q: "USB tanpa label ditemukan.",
-    a: [
-      "Colokkan",
-      "Serahkan ke IT",
-      "Simpan"
-    ],
-    c: 1
-  },
-  {
-    q: "Domain email mirip perusahaan.",
-    a: [
-      "Percaya",
-      "Cek header & domain",
-      "Buka lampiran"
-    ],
-    c: 1
-  },
-  {
-    q: "Instruksi diminta dirahasiakan.",
-    a: [
-      "Ikuti",
-      "Laporkan",
-      "Tunda"
-    ],
-    c: 1
-  },
-  {
-    q: "QR Code tak dikenal ke halaman login.",
-    a: [
-      "Scan",
-      "Laporkan ke TI",
-      "Abaikan"
-    ],
-    c: 1
-  },
-  {
-    q: "Password sama di banyak sistem.",
-    a: [
-      "Aman",
-      "Single point of failure",
-      "Praktis"
-    ],
-    c: 1
-  },
-  {
-    q: "Email mendesak tanpa nama Anda.",
-    a: [
-      "Internal",
-      "Phishing massal",
-      "HR broadcast"
-    ],
-    c: 1
-  },
-  {
-    q: "Transfer diminta di luar SOP.",
-    a: [
-      "Boleh",
-      "Langgar GCG & kontrol",
-      "Situasional"
-    ],
-    c: 1
-  }
-];
-
-/* ================= QUIZ ENGINE ================= */
-let quiz = [];
-let qi = 0;
-let score = 0;
-
-function shuffle(arr){
-  return arr.sort(() => Math.random() - 0.5);
-}
-
-function startQuiz(){
-  quiz = shuffle([...securityQuiz]);
-  qi = 0;
-  score = 0;
-  renderQuiz();
-}
-
-function renderQuiz(){
-  const box = document.getElementById("quizBox");
-  if (!box) return;
-
-  if (qi >= quiz.length){
-    const ratio = score / quiz.length;
-    let level, note;
-
-    if (ratio === 1){
-      level = "SANGAT BAIK";
-      note = "Kesadaran keamanan informasi Anda berada pada level profesional.";
-    } else if (ratio >= 0.8){
-      level = "BAIK";
-      note = "Pemahaman kuat. Tetap waspada terhadap social engineering lanjutan.";
-    } else if (ratio >= 0.6){
-      level = "CUKUP";
-      note = "Masih terdapat risiko. Disarankan mengulang materi.";
-    } else {
-      level = "PERLU PERBAIKAN";
-      note = "Risiko tinggi terhadap phishing. Wajib edukasi ulang.";
+(function(){
+    const body=document.body;
+    const sections=document.querySelectorAll('.page-section');
+    function show(id){
+        sections.forEach(s=>s.classList.toggle('active', s.id===id));
+        if(id==='home'){ body.classList.add('home'); } else { body.classList.remove('home'); }
+        const sec=document.getElementById(id);
+        const focusable=sec.querySelector('button, [tabindex], a, input, textarea');
+        if(focusable) setTimeout(()=>focusable.focus(),200);
     }
-
-    box.innerHTML = `
-      <h3>Hasil Evaluasi</h3>
-      <p><strong>Skor:</strong> ${score}/${quiz.length}</p>
-      <p><strong>Kategori:</strong> ${level}</p>
-      <p>${note}</p>
-    `;
-    return;
-  }
-
-  const q = quiz[qi];
-  box.innerHTML = `
-    <p><strong>${qi+1}. ${q.q}</strong></p>
-    ${q.a.map((o,i)=>`
-      <label style="display:block;margin:8px 0">
-        <input type="radio" name="q" value="${i}">
-        ${o}
-      </label>`).join("")}
-    <br>
-    <button class="btn" onclick="answer()">Jawab</button>
-  `;
-}
-
-function answer(){
-  const sel = document.querySelector('input[name="q"]:checked');
-  if (!sel) return;
-  if (+sel.value === quiz[qi].c) score++;
-  qi++;
-  renderQuiz();
-}
-
-/* ================= FORM SANITATION ================= */
-function sendReport(e){
-  e.preventDefault();
-  const clean = v => v.replace(/[<>]/g,"");
-  location.href =
-    `mailto:itdepartment@rdm.co.id?subject=Pengaduan Phishing&body=
-Nama:${clean(nama.value)}
-Email:${clean(email.value)}
-Laporan:${clean(laporan.value)}`;
-}
-
+    document.querySelectorAll('[data-target]').forEach(btn=>{ btn.addEventListener('click',()=> { const t=btn.getAttribute('data-target'); if(t) show(t); }); });
+    document.querySelectorAll('[data-next]').forEach(btn=>{ btn.addEventListener('click',()=> { const t=btn.getAttribute('data-next'); if(t) show(t); }); });
+    document.querySelectorAll('[data-back]').forEach(btn=>{ btn.addEventListener('click',()=> { const t=btn.getAttribute('data-back'); if(t) show(t); }); });
+    document.querySelectorAll('.card[data-target], article[data-target]').forEach(el=>{
+        el.addEventListener('click',()=> show(el.getAttribute('data-target')));
+        el.addEventListener('keydown',(e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); show(el.getAttribute('data-target')); } });
+    });
+    document.getElementById('startBtn').addEventListener('click',()=> show('materi'));
+    document.getElementById('learnMore').addEventListener('click',()=> show('tips'));
+    window.openQuiz=function(){ window.open('https://forms.office.com/Pages/ResponsePage.aspx?id=6dcS_Rf9Y0i4twaWsqIdqvcsVWGBB_lKl8Qs3xibGItUMk9PRFlPNDZIWE4yWlk5RUNUU0dCTDhTMi4u','_blank'); }
+    window.sendReport=function(e){
+        e.preventDefault();
+        const name=document.getElementById('fname').value.trim();
+        const email=document.getElementById('femail').value.trim();
+        const bodyText=document.getElementById('fbody').value.trim();
+        const to='Pengaduan.Phising@rdm.co.id';
+        const subject=encodeURIComponent('Laporan Indikasi Phising - '+name);
+        const bodyMail=encodeURIComponent('Nama: '+name+'\nEmail: '+email+'\n\nKronologi:\n'+bodyText);
+        const mailto=`mailto:${to}?subject=${subject}&body=${bodyMail}`;
+        window.location.href=mailto;
+    };
+})();
 </script>
-
 </body>
 </html>
